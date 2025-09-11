@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vikas Pratap - Full Stack Developer Portfolio</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Google Fonts for improved typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS for enhanced UI, responsiveness, and animations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Kode Mono', monospace;
+            background-color: #04978d;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #12044f, #611616);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header .container {
+            position: relative;
+            z-index: 1;
+            /* Bring the content above the pseudo-element */
+        }
+
+        header .social a {
+            color: white;
+            font-size: 1.3em;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            /* Ensure pointer cursor */
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: pulse 5s infinite;
+            z-index: 0;
+            /* Make it behind the header content */
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.6em;
+            font-weight: 300;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 25%;
+            border: 2px solid rgb(248, 248, 248);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .social a {
+            color: white;
+            font-size: 1.3em;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+        }
+        .social a i {
+        margin-right: 8px; 
+        }
+
+        .social a:hover {
+            color: #000000;
+        }
+
+        nav {
+            background-color: #343a40;
+            position: relative;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-family: 'Kode Mono', monospace;
+            font-weight: 700;
+            font-size: 1.2rem;
+            /* Slightly smaller for balance */
+            color: #ffffff !important;
+            display: flex;
+            align-items: center;
+        }
+
+
+        nav a {
+            color: white !important;
+            font-weight: 500;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #495057;
+        }
+
+        section {
+            padding: 80px 20px;
+            min-height: 400px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+       #skills {
+        padding: 60px 20px;
+        text-align: left;
+            background: linear-gradient(180deg, #050a3d, #443333);
+        }
+        #skills h2 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #ffffff;
+    font-weight: 700;
+}
+        h2 {
+            font-weight: 700;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 30px; /* Spacing between skill cards */
+    justify-items: center;
+    align-items: center;
+}
+
+/* Individual Skill Card */
+.skill-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 180px;
+}
+
+/* Hover Effect */
+.skill-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Skill Icon */
+.skill-card img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+}
+
+/* Skill Name */
+.skill-card p {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    margin: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    #skills h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+    .skill-card {
+        max-width: 140px;
+        padding: 15px;
+    }
+    .skill-card img {
+        width: 50px;
+        height: 50px;
+    }
+}
+        #skills .col-md-6 {
+        margin-bottom: 30px;
+        }
+
+        .skills .card {
+            border: none;
+            padding: 25px ;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px; /* Increased padding */
+        }
+
+.skills .d-flex.flex-wrap.gap-3 {
+    padding: 10px; /* Padding around badges */
+}
+
+        .skills .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgb(255, 255, 255);
+        }
+
+        .skills .badge {
+            font-size: 1em;
+            padding: 12px 20px;
+            margin: 8px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            color: rgb(255, 255, 255);
+            border-radius: 0.5rem;
+            position: relative;
+            min-width: 110px;
+            transition: transform 0.3s ease;
+        }
+
+        .skills .badge img {
+            width: 2px;
+            height: 2px;
+            margin-left: 10px;
+            margin-top: 0;
+            object-fit: contain;
+        }
+
+        .skills .badge:hover {
+            transform: scale(1.05);
+        }
+
+        .skills .badge:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #343a40;
+            color: rgb(4, 4, 4);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            white-space: nowrap;
+            z-index: 10;
+            opacity: 0.9;
+        }
+
+
+        .education .card,
+        .projects .card,
+        .experience .card,
+        .achievements .card {
+            background-color: #4b1010;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .education .card:hover,
+        .projects .card:hover,
+        .experience .card:hover,
+        .achievements .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        form .form-control {
+            border-radius: 0.5rem;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s ease;
+        }
+
+        form .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+        }
+
+        form button {
+            border-radius: 0.5rem;
+            padding: 12px 30px;
+            transition: background-color 0.3s ease;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        form button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        #backToTop {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        #backToTop:hover {
+            background-color: #0056b3;
+            transform: scale(1.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            header p {
+                font-size: 1.3em;
+            }
+
+            .navbar-nav {
+                text-align: center;
+            }
+
+            nav a {
+                padding: 10px 15px;
+            }
+
+            section {
+                padding: 60px 15px;
+            }
+
+            .projects .col-md-6 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+
+            .skills .badge {
+                font-size: 0.9em;
+                padding: 10px 18px;
+                min-width: 100px;
+            }
+
+            .skills .badge img {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 60px 15px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            header p {
+                font-size: 1.1em;
+            }
+
+            .social a {
+                font-size: 1em;
+                margin: 0 10px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+
+            .skills .badge {
+                font-size: 0.8em;
+                padding: 8px 16px;
+                min-width: 90px;
+            }
+
+            .skills .badge img {
+                width: 4px;
+                height: 4px;
+            }
+
+            .projects .card {
+                margin-bottom: 2px;
+            }
+
+            form .form-control {
+                font-size: 0.9em;
+            }
+
+            form button {
+                width: 100%;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+            }
+        }
+
+        /* Form validation styles */
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            display: none;
+            color: #dc3545;
+            font-size: 0.9em;
+        }
+
+        .form-control.is-invalid~.invalid-feedback {
+            display: block;
+        }
+    </style>
+    <!-- Firebase SDK (Updated to v10.x modular for compatibility and error prevention) -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+        import { getFirestore, collection, addDoc, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
+        // Initialize Firebase (Replace with your own Firebase config)
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        window.db = getFirestore(app); // Store db globally for access in non-module scripts
+    </script>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <img src="https://avatars.githubusercontent.com/u/155092143?v=4" alt="Vikas Pratap Profile Picture"
+                class="profile-img">
+            <h1>Vikas Pratap</h1>
+            <p>Full Stack Developer | Student</p>
+            <div class="social">
+    <a href="https://github.com/vikas00714" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/vikaspratap/" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+    <a href="path-to-your-resume.pdf" target="_blank">
+        <i class="fas fa-file"></i> Resume
+    </a>
+</div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <section id="about" class="bg-light">
+        <div class="container">
+            <h2>About Me</h2>
+            <p class="lead">I’m a passionate and driven B.Tech student with a strong interest in AI, machine learning,
+                and full-stack development. I’ve worked on impactful projects like an automated attendance system, and I
+                continuously build my skills through internships.</p>
+        </div>
+    </section>
+
+    </h><section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card front-end">
+                        <div class="card-body">
+                            <h4>Front-End Development</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>HTML/CSS/JavaScript</strong> - Building responsive UIs</li>
+                                <li class="mb-2"><strong>React.js</strong> - Creating dynamic single-page applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card back-end">
+                        <div class="card-body">
+                            <h4>Back-End Development</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>MongoDB</strong> - NoSQL database for scalable applications</li>
+                                <li class="mb-2"><strong>MySQL</strong> - Relational database management</li>
+                                <li class="mb-2"><strong>Python (Django/Flask)</strong> - Web frameworks</li>
+                                <li class="mb-2"><strong>Java</strong> - General-purpose programming</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card programming">
+                        <div class="card-body">
+                            <h4>Programming & Concepts</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>Python</strong> - Versatile language for ML and apps</li>
+                                <li class="mb-2"><strong>Java</strong> - Object-oriented programming</li>
+                                <li class="mb-2"><strong>Code Structure and Architecture</strong> - Designing efficient code</li>
+                                <li class="mb-2"><strong>Web Performance Optimisation</strong> - Improving web app speed</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card tools">
+                        <div class="card-body">
+                            <h4>Tools</h4>
+                            <ul class="list-unstyled">
+                                <li class="mb-2"><strong>IntelliJ IDEA</strong> - IDE for Java development</li>
+                                <li class="mb-2"><strong>Git & GitHub</strong> - Version control</li>
+                                <li class="mb-2"><strong>Visual Studio Code</strong> - Code editor</li>
+                                <li class="mb-2"><strong>Jupyter</strong> - Notebook for data science</li>
+                                <li class="mb-2"><strong>Wireshark</strong> - Network protocol analyzer</li>
+                                <li class="mb-2"><strong>QualNet</strong> - Network simulation tool</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="education" class="bg-light">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Bachelor of Technology in Information Technology</h5>
+                    <p class="card-text">Rajkiya Engineering College, Azamgarh, Uttar Pradesh, India<br>2023 -
+                        2026<br>Relevant coursework: Operating System, DSA, OOPs, DBMS & Computer Networking.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="bg-light">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Assistant Engineer - Dixon Technologies Pvt. Ltd</h5>
+                    <p class="card-text">March 2022 - April 2023<br>Manage and design the Printed circuit board and
+                        Optimize the error on automated mounters (NPM-Panasonic).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2>Achievements</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <ul>
+                                <li>Solved 300+ problems on GeeksforGeeks.</li>
+                                <li>4 stars in Java and C on Hackerrank.</li>
+                                <li>3 stars in Python on Hackerrank.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Real-Time Face Recognition Automatic Students Attendance Management
+                            </h5>
+                            <p class="card-text">Automates the traditional attendance process using Face Recognition
+                                technology. Detects faces using Haar Cascade Classifier (based on Haar-like features and
+                                AdaBoost). Recognises faces using LBPH (Local Binary Pattern Histogram) algorithm for
+                                feature extraction and comparison. Matches detected faces with the pre-trained dataset
+                                of student images. Stores attendance records in a database (MySQL) or CSV file for easy
+                                access. Technologies Used: Python, OpenCV, LBPH Algorithm, Haar Cascade Classifier,
+                                MySQL (or CSV), Android Studio.</p>
+                            <a href="https://github.com/vikas00714/face_recognition_project-main" target="_blank"
+                                class="btn btn-outline-primary">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Car Racing Game</h5>
+                            <p class="card-text">Built an interactive 2D car racing game using HTML5 Canvas and Vanilla
+                                JavaScript. Features collision detection, scoring, and dynamic speed adjustments.
+                                Technologies Used: HTML5, CSS3, Vanilla JavaScript.</p>
+                            <a href="https://github.com/vikas00714/Car-Racing-Game-HTML5-CSS3-JavaScript"
+                                target="_blank" class="btn btn-outline-primary">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart To-Do List with Reminders & Drag-and-Drop</h5>
+                            <p class="card-text">Built an advanced task management app with due date reminders,
+                                drag-and-drop task reordering, dark/light mode, and persistent storage. Integrated
+                                browser notifications and localStorage. Technologies Used: React.js, Tailwind CSS,
+                                Framer Motion, React Beautiful DnD.</p>
+                            <a href="https://github.com/vikas00714/To-Do-list--App" target="_blank"
+                                class="btn btn-outline-primary">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Tic Tac Toe Game</h5>
+                            <p class="card-text">Built an enhanced Tic Tac Toe game with Minimax AI, smooth animations,
+                                power-ups, responsive UI, and optional sprite-based graphics. Technologies Used: HTML5,
+                                CSS3, Vanilla JavaScript.</p>
+                            <a href="https://github.com/vikas00714/Tic-toc-toe-game-" target="_blank"
+                                class="btn btn-outline-primary">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Resume Screening App</h5>
+                            <p class="card-text">A machine learning-based app for screening resumes using Python and
+                                Jupyter Notebook. Helps NGOs or companies automate candidate selection. Technologies
+                                Used: Python, Machine Learning, Jupyter Notebook.</p>
+                            <a href="https://github.com/vikas00714/Resume-Screening-App" target="_blank"
+                                class="btn btn-outline-primary">View on GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-light">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form id="contactForm">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="name" required>
+                    <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">Please enter a valid email address.</div>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label">Message</label>
+                    <textarea class="form-control" id="message" rows="5" required></textarea>
+                    <div class="invalid-feedback">Please enter a message.</div>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitButton">Send Message</button>
+                <br><br><br><br><br>
+                <p>Email: vikaspratap14@gmail.com </p>
+                <p>Phone: +91 7054970818 </p>
+                <p>Location: Lucknow, Uttar Pradesh, India</p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="text-center">
+        <p>&copy; 2025 Vikas Pratap. All rights reserved.</p>
+    </footer>
+
+    <button id="backToTop" title="Back to Top">↑</button>
+
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- Form handling and other JS -->
+    <script>
+        // Smooth scrolling with offset for sticky navbar
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navbarHeight = document.querySelector('nav').offsetHeight;
+                window.scrollTo({
+                    top: targetElement.offsetTop - navbarHeight,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back to Top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Section fade-in on scroll
+        const sections = document.querySelectorAll('section');
+        const options = {
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // Form validation and submission
+        const contactForm = document.getElementById('contactForm');
+        const submitButton = document.getElementById('submitButton');
+        const inputs = contactForm.querySelectorAll('input, textarea');
+
+        // Real-time validation
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.checkValidity()) {
+                    input.classList.remove('is-invalid');
+                    input.classList.add('is-valid');
+                } else {
+                    input.classList.remove('is-valid');
+                    input.classList.add('is-invalid');
+                }
+            });
+        });
+
+        // Handle form submission to Firestore
+        contactForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+
+            // Validate form
+            let isValid = true;
+            if (!name) {
+                document.getElementById('name').classList.add('is-invalid');
+                isValid = false;
+            }
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('email').classList.add('is-invalid');
+                isValid = false;
+            }
+            if (!message) {
+                document.getElementById('message').classList.add('is-invalid');
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+
+            try {
+                await window.db.collection('contacts').add({
+                    name: name,
+                    email: email,
+                    message: message,
+                    timestamp: serverTimestamp()
+                });
+                alert('Message sent successfully!');
+                contactForm.reset();
+                inputs.forEach(input => {
+                    input.classList.remove('is-valid', 'is-invalid');
+                });
+            } catch (error) {
+                alert('Error sending message: ' + error.message);
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = 'Send Message';
+            }
+        });
+    </script>
+</body>
+
+</html>
